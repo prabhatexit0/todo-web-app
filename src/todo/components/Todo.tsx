@@ -5,7 +5,7 @@ const Todo = ({todo}: TodoProps) => {
     const context = useContext(Global);
 
     const taskDone = () => {
-        context?.setTodos( context.todos.filter(curr => {
+        context?.which(todo).setState( context.todos.filter(curr => {
             return (curr !== todo);
         }) )
     }

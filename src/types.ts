@@ -1,4 +1,11 @@
-declare global { 
+declare global {
+    interface globalContext {
+        toggler: () => void;
+        setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+        todos: TodoType[];
+        which: ({ type }: TodoType) => StateCouple;
+    }
+
     interface TodoProps {
         todo: TodoType
     }
@@ -24,6 +31,11 @@ declare global {
         task: string;
         subtext: string;
         type: string;
+    }
+
+    interface StateCouple {
+        state: TodoType[];
+        setState: React.Dispatch<React.SetStateAction<TodoType[]>>;
     }
 
 }

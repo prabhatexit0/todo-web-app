@@ -36,7 +36,6 @@ const TodoForm = () => {
 }
 
 
-
 const Input = ({ placeholderText, type }: InputProps) => {
     const [inputVal, setInputVal] = useState("");
 
@@ -67,7 +66,7 @@ const Input = ({ placeholderText, type }: InputProps) => {
 }
 
 const RadioColor = ({ id, label, value }: RadioProps) => {
-    let val = "";
+    let val = value;
     return (
         <div
             className="
@@ -106,6 +105,7 @@ const Color = () => {
 
     const changeRadio = (e: React.FormEvent<HTMLDivElement>) => {
         selection.type = (e.target as HTMLInputElement).value
+        console.log(selection.type)
     }
 
     return (
@@ -138,7 +138,12 @@ const Button = ({ text, type }: ButtonProps) => {
 
     const buttonClicked = () => {
         if (type === "submit") {
-            context?.setTodos([...context.todos, { type: selection.type, subtext: selection.subtext, task: selection.task }]);
+            const current = context?.which(selection);
+            current?.setState([...current.state, {
+                type: selection.type,
+                subtext: selection.subtext,
+                task: selection.task
+            }])
         }
         context?.toggler();
     }

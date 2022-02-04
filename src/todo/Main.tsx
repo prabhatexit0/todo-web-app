@@ -10,7 +10,28 @@ const Main = () => {
 
     const [toggle, setToggle] = useState<boolean>(false);
     const [todos, setTodos] = useState<TodoType[]>([]);
-    
+
+    const [UI, setUI] = useState<TodoType[]>([]);
+    const [NUI, setNUI] = useState<TodoType[]>([]);
+    const [NUNI, setNUNI] = useState<TodoType[]>([]);
+    const [UNI, setUNI] = useState<TodoType[]>([]);
+
+
+    const which  = ({ type }: TodoType) => {
+        switch (type) {
+            case "UI":
+                return { state: UI, setState: setUI };
+            case "UNI":
+                return { state: UNI, setState: setUNI };
+            case "NUI":
+                return { state: NUI, setState: setNUI };
+            case "NUNI":
+                return { state: NUNI, setState: setNUNI };
+            default:
+                return { state: UI, setState: setUI };
+        }
+    }
+
     let index = 0;
 
     const toggler = () => {
@@ -30,7 +51,7 @@ const Main = () => {
                 lg:w-[40%]
                 h-screen " >
 
-            <Global.Provider value={{ toggler, todos, setTodos }}>
+            <Global.Provider value={{ toggler, todos, setTodos, which }}>
 
                 <div
                     className="
@@ -43,12 +64,26 @@ const Main = () => {
                         overflow-y-scroll
                         p-5
                         ">
-                    {todos.map(todo => {
+                    {UI.map(todo => {
                         return <div key={index++} >
                             <Todo todo={todo} />
                         </div>
                     })}
-
+                    {UNI.map(todo => {
+                        return <div key={index++} >
+                            <Todo todo={todo} />
+                        </div>
+                    })}
+                    {NUI.map(todo => {
+                        return <div key={index++} >
+                            <Todo todo={todo} />
+                        </div>
+                    })}
+                    {NUNI.map(todo => {
+                        return <div key={index++} >
+                            <Todo todo={todo} />
+                        </div>
+                    })}
                 </div>
 
                 {toggle ? <TodoForm /> : null}
