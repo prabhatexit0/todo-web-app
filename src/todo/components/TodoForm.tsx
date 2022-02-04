@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Global from '../context/Global'
 
-
 const selection: todoType = {task: "", subtext: "", type: ""};
 
 const TodoForm = () => {

@@ -1,8 +1,9 @@
-import './index.css'
+import '../index.css'
 import TodoForm from './components/TodoForm';
 import { useState } from 'react';
 import Global from './context/Global'
 import Todo from './components/Todo'
+
 
 declare global {
     interface todoType {
@@ -10,13 +11,13 @@ declare global {
         subtext: string;
         type: string;
     }
-
 }
 
 const Main = () => {
 
     const [toggle, setToggle] = useState<boolean>(false);
     const [todos, setTodos] = useState<todoType[]>([]);
+    
     let index = 0;
 
     const toggler = () => {
@@ -30,7 +31,11 @@ const Main = () => {
                 flex-col
                 justify-end
                 items-center
-                h-screen w-screen" >
+                border-l-4
+                border-gray-900
+                w-full
+                lg:w-[40%]
+                h-screen " >
 
             <Global.Provider value={{ toggler, todos, setTodos }}>
 
@@ -42,6 +47,7 @@ const Main = () => {
                         flex-wrap
                         justify-center
                         content-start
+                        overflow-y-scroll
                         p-5
                         ">
                     {todos.map(todo => {
@@ -63,7 +69,7 @@ const Main = () => {
                     w-2/5
                     max-w-[20rem]
                     p-3
-                    m-3
+                    m-5
                     font-bold
                     rounded-full
                     text-xl

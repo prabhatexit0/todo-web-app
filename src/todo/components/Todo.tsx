@@ -14,8 +14,8 @@ const Todo: React.FC<{ todo: todoType; }> = (todo: { todo: todoType }) => {
                 bg-slate-500 
                 w-80
                 max-w-[25rem]
-                m-5
                 p-3
+                mb-10
                 rounded-xl
                 shadow-lg
                 text-white
