@@ -2,8 +2,8 @@ import React from "react";
 
 interface globalContext {
     toggler: () => void;
-    setTodos: React.Dispatch<React.SetStateAction<todoType[]>>;
-    todos: todoType[];
+    setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+    todos: TodoType[];
 }
 
 const Context = React.createContext<globalContext | undefined>(undefined);

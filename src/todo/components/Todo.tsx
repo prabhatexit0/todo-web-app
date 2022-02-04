@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import Global from '../context/Global'
 
-const Todo: React.FC<{ todo: todoType; }> = (todo: { todo: todoType }) => {
+const Todo = ({todo}: TodoProps) => {
     const context = useContext(Global);
+
     const taskDone = () => {
         context?.setTodos( context.todos.filter(curr => {
-            return (curr !== todo.todo);
+            return (curr !== todo);
         }) )
     }
+
     return (
         <div
             className="
@@ -19,11 +21,24 @@ const Todo: React.FC<{ todo: todoType; }> = (todo: { todo: todoType }) => {
                 rounded-xl
                 shadow-lg
                 text-white
-            "
-        >
-            <h2 className="font-bold text-2xl">{todo.todo.task}</h2>
-            <p>{todo.todo.subtext}</p>
-            <p className="font-bold text-yellow-400">{todo.todo.type}</p>
+            ">
+
+            <h2 
+                className="
+                    font-bold 
+                    text-2xl">
+                {todo.task}
+            </h2>
+
+            <p>{todo.subtext}</p>
+
+            <p 
+                className="
+                    font-bold 
+                    text-yellow-400">
+                {todo.type}
+            </p>
+
             <button
                 onClick={taskDone}
                 className="

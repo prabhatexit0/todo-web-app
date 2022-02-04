@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import Global from '../context/Global'
 
-const selection: todoType = {task: "", subtext: "", type: ""};
+const selection: TodoType = { task: "", subtext: "", type: "" };
 
 const TodoForm = () => {
-
     return (
-        <div 
+        <div
             className="
                 bg-gray-50
                 py-4
@@ -25,9 +24,9 @@ const TodoForm = () => {
                 transition-all
                 hover:bg-slate-600
             ">
-            <Input placeholderText="Enter Task Name" type="task"/>
-            <Input placeholderText="Enter Sub Text" type="subtext"/>
-            <Color/>
+            <Input placeholderText="Enter Task Name" type="task" />
+            <Input placeholderText="Enter Sub Text" type="subtext" />
+            <Color />
             <Button text={"SUBMIT"} type={"submit"} />
             <Button text={"LEAVE"} type={"leave"} />
 
@@ -38,27 +37,22 @@ const TodoForm = () => {
 
 
 
-interface inputBox {
-    placeholderText: string;
-    type: string;
-}
-
-const Input: React.FC<inputBox> = ({placeholderText, type}) => {
+const Input = ({ placeholderText, type }: InputProps) => {
     const [inputVal, setInputVal] = useState("");
 
     useEffect(() => {
-        if(type === "task") {
+        if (type === "task") {
             selection.task = inputVal;
         } else {
             selection.subtext = inputVal;
         }
-    }, [inputVal])
-    
+    }, [inputVal, type])
+
     return (
-        <input 
+        <input
             type="text"
             value={inputVal}
-            onChange={e => { setInputVal(e.target.value)}}
+            onChange={e => { setInputVal(e.target.value) }}
             placeholder={placeholderText}
             className="
                 p-2
@@ -72,23 +66,15 @@ const Input: React.FC<inputBox> = ({placeholderText, type}) => {
     )
 }
 
-interface radioInput {
-    id: number;
-    label: string;
-    value: string;
-}
-
-const RadioColor: React.FC<radioInput> = ({id, label, value}) => {
-    const [val, setVal] = useState(value);
-
+const RadioColor = ({ id, label, value }: RadioProps) => {
+    let val = "";
     return (
-        <div 
+        <div
             className="
-                flex
-                items-center
-                text-sm
-            "
-        >
+            flex
+            items-center
+            text-sm ">
+
             <input
                 type="radio"
                 name="radioColor"
@@ -98,23 +84,25 @@ const RadioColor: React.FC<radioInput> = ({id, label, value}) => {
                     mx-1
                 "
             />
+
             <label
                 className="
                 "
                 htmlFor={id.toString()}>
                 {label}
             </label>
+
         </div>
     )
 }
 
-const Color: React.FC = () => {
-    const colors: radioInput[] = [
-        {id: 123, label: "UI", value: "UI"},
-        {id: 124, label: "UNI", value: "UNI"},
-        {id: 125, label: "NUI", value: "NUI"},
-        {id: 126, label: "NUNI", value: "NUNI"},
-    ] 
+const Color = () => {
+    const colors: RadioProps[] = [
+        { id: 123, label: "UI", value: "UI" },
+        { id: 124, label: "UNI", value: "UNI" },
+        { id: 125, label: "NUI", value: "NUI" },
+        { id: 126, label: "NUNI", value: "NUNI" },
+    ]
 
     const changeRadio = (e: React.FormEvent<HTMLDivElement>) => {
         selection.type = (e.target as HTMLInputElement).value
@@ -134,9 +122,9 @@ const Color: React.FC = () => {
         >
             {
                 colors.map(color => {
-                    return <div 
-                        onChange ={(e) => changeRadio(e)} key={color.id}>  
-                        <RadioColor id={color.id} label={color.label} value={color.value}/>
+                    return <div
+                        onChange={(e) => changeRadio(e)} key={color.id}>
+                        <RadioColor id={color.id} label={color.label} value={color.value} />
                     </div>
                 })
             }
@@ -144,18 +132,14 @@ const Color: React.FC = () => {
     )
 }
 
-interface buttonProps {
-    text: string;
-    type: string;
-}
 
-const Button: React.FC<buttonProps> = ({text, type}) => {
+const Button = ({ text, type }: ButtonProps) => {
     const context = useContext(Global);
 
     const buttonClicked = () => {
-        if(type === "submit") {
-            context?.setTodos([...context.todos, {type: selection.type, subtext: selection.subtext, task: selection.task} ]);
-        } 
+        if (type === "submit") {
+            context?.setTodos([...context.todos, { type: selection.type, subtext: selection.subtext, task: selection.task }]);
+        }
         context?.toggler();
     }
     return (

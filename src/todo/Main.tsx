@@ -5,18 +5,11 @@ import Global from './context/Global'
 import Todo from './components/Todo'
 
 
-declare global {
-    interface todoType {
-        task: string;
-        subtext: string;
-        type: string;
-    }
-}
 
 const Main = () => {
 
     const [toggle, setToggle] = useState<boolean>(false);
-    const [todos, setTodos] = useState<todoType[]>([]);
+    const [todos, setTodos] = useState<TodoType[]>([]);
     
     let index = 0;
 

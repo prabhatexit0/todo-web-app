@@ -5,14 +5,14 @@ import Main from './todo/Main'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div 
+    <div
       className="
         bg-gray-500 
         flex
         justify-end
         h-screen 
         w-screen">
-      <Main/>
+      <Main />
     </div>
   </React.StrictMode>,
   document.getElementById('root')
